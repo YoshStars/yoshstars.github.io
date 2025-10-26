@@ -3,717 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClubIGT - Centro Técnico Apple</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>ClubIGT - Solución Mejorada</title>
     <style>
+        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        
-        :root {
-            /* Paleta Nórdica Gris */
-            --snow: #F8F9FA;
-            --polar-night: #2E3440;
-            --frost: #88C0D0;
-            --aurora-green: #A3BE8C;
-            --aurora-yellow: #EBCB8B;
-            --aurora-red: #BF616A;
-            --light: #ECEFF4;
-            --dark: #2E3440;
-            --text: #4C566A;
-            --border: #D8DEE9;
-            --card-bg: #FFFFFF;
-            --gray-1: #ECEFF4;
-            --gray-2: #E5E9F0;
-            --gray-3: #D8DEE9;
-            --gray-4: #4C566A;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, var(--snow) 0%, var(--light) 50%, var(--gray-2) 100%);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
         }
         
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
-        /* Header Moderno */
+        /* Header y navegación */
         header {
-            background: rgba(236, 239, 244, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: fixed;
-            width: 100%;
+            background-color: #1a3a5f;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
             top: 0;
             z-index: 1000;
-            transition: all 0.4s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--polar-night);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4CAF50;
         }
         
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--frost);
-            border-radius: 50%;
-        }
-        
-        /* Menú Hamburguesa para Mobile */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-        
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--polar-night);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-links {
+        .nav-menu {
             display: flex;
             list-style: none;
-            align-items: center;
-            gap: 25px;
         }
         
-        .nav-link {
-            color: var(--text);
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 14px;
+            transition: color 0.3s;
         }
         
-        .nav-link.active {
-            color: var(--frost);
-            background: rgba(136, 192, 208, 0.1);
+        .nav-menu a:hover {
+            color: #4CAF50;
         }
         
-        .nav-link:hover {
-            color: var(--frost);
-            transform: translateY(-2px);
-        }
-        
-        .btn {
-            background: var(--frost);
-            color: var(--polar-night);
-            padding: 12px 24px;
-            border-radius: 10px;
+        .btn-cotizar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-cotizar:hover {
+            background-color: #3d8b40;
+        }
+        
+        /* Menú hamburguesa para móviles */
+        .hamburger {
+            display: none;
             cursor: pointer;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(136, 192, 208, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
         }
         
-        .btn:hover {
-            background: var(--aurora-green);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(163, 190, 140, 0.4);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--frost);
-            border: 2px solid var(--frost);
-            box-shadow: none;
-        }
-        
-        .btn-outline:hover {
-            background: var(--frost);
-            color: var(--polar-night);
-        }
-        
-        /* Animación de dispositivos */
-        .floating-devices {
-            position: fixed;
-            z-index: 998;
-            pointer-events: none;
-            opacity: 0.08;
-            filter: blur(0.8px);
-        }
-        
-        .device {
-            position: absolute;
-            font-size: 30px;
-            animation: floatDevice 25s infinite linear;
-            color: var(--gray-4);
-        }
-        
-        @keyframes floatDevice {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(calc(80vw - 100px), calc(40vh - 50px)) rotate(90deg);
-            }
-            50% {
-                transform: translate(calc(40vw - 50px), calc(80vh - 100px)) rotate(180deg);
-            }
-            75% {
-                transform: translate(calc(20vw - 25px), calc(20vh - 25px)) rotate(270deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
+        .hamburger span {
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
         
         /* Secciones */
-        .section {
-            min-height: 100vh;
-            padding: 100px 0 60px;
-            display: none;
-            position: relative;
+        section {
+            padding: 80px 0;
         }
         
-        .section.active {
-            display: block;
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            color: #1a3a5f;
         }
         
         /* Hero Section */
         .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://source.unsplash.com/random/1600x900/?business') no-repeat center center/cover;
+            color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 150px 0;
         }
         
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(136, 192, 208, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(163, 190, 140, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(76, 86, 106, 0.03) 0%, transparent 50%);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(163, 190, 140, 0.1);
-            color: var(--aurora-green);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 25px;
-            border: 1px solid rgba(163, 190, 140, 0.2);
-        }
-        
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 3.8rem);
-            font-weight: 800;
+        .hero h1 {
+            font-size: 3rem;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--polar-night) 0%, var(--frost) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
         }
         
-        .hero-content p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            color: var(--text);
-            margin-bottom: 35px;
-            line-height: 1.6;
-        }
-        
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-        
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 50px;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.6);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--frost);
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .stat-label {
-            color: var(--text);
-            font-size: 0.9rem;
-            font-weight: 500;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
         }
         
         /* Servicios */
-        .services-section {
-            background: var(--light);
-        }
-        
-        .services-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-tag {
-            display: inline-block;
-            background: var(--frost);
-            color: var(--polar-night);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--polar-night);
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
         
         .service-card {
-            background: var(--card-bg);
-            border-radius: 16px;
+            background: white;
+            border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--frost), var(--aurora-green));
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
-        
-        .service-card:hover::before {
-            transform: scaleX(1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
         
         .service-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--frost), var(--aurora-green));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--polar-night);
+            font-size: 2.5rem;
+            color: #4CAF50;
             margin-bottom: 20px;
         }
         
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--polar-night);
-            font-weight: 700;
-        }
-        
-        .service-features {
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        .service-features li {
-            padding: 6px 0;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-        
-        .service-features li i {
-            color: var(--aurora-green);
-            font-size: 12px;
-        }
-        
-        .service-price {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--frost);
-            margin: 20px 0;
-        }
-        
-        /* Artículos/Blog */
+        /* Artículos */
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 30px;
         }
         
         .article-card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
-        }
-        
-        .article-image {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, var(--frost), var(--aurora-green));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: var(--polar-night);
+        .article-img {
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
         }
         
         .article-content {
             padding: 20px;
         }
         
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-            font-size: 12px;
-            color: var(--text);
-        }
-        
-        .article-tag {
-            background: var(--aurora-yellow);
-            color: var(--polar-night);
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        
-        .article-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--polar-night);
-            line-height: 1.4;
-        }
-        
-        .article-card p {
-            color: var(--text);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        
-        .read-more {
-            color: var(--frost);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        /* Página de Artículo Individual */
-        .article-page {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        
-        .article-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .article-hero-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, var(--frost), var(--aurora-green));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: var(--polar-night);
-            margin-bottom: 30px;
-        }
-        
-        .article-body {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border);
-        }
-        
-        .article-body h2 {
-            color: var(--polar-night);
-            margin: 25px 0 15px;
-            font-size: 1.5rem;
-        }
-        
-        .article-body p {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-        
-        .article-body ul {
-            margin: 15px 0;
-            padding-left: 20px;
-        }
-        
-        .article-body li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-        
-        .back-btn {
-            background: var(--gray-3);
-            color: var(--polar-night);
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 30px;
-        }
-        
-        .back-btn:hover {
-            background: var(--frost);
-        }
-        
-        /* Proceso de Reparación */
-        .process-section {
-            background: var(--polar-night);
-            color: var(--snow);
-        }
-        
+        /* Proceso */
         .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 50px;
         }
         
-        .process-step {
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #e0e0e0;
+            z-index: 1;
+        }
+        
+        .step {
             text-align: center;
-            padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .process-step:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 2;
+            flex: 1;
         }
         
         .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--aurora-green);
+            width: 80px;
+            height: 80px;
+            background-color: #4CAF50;
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            margin: 0 auto 15px;
-            color: var(--polar-night);
-            font-size: 1rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
         }
         
         /* Testimonios */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+        .testimonials {
+            background-color: #f0f7ff;
         }
         
-        .testimonial-card {
-            background: var(--card-bg);
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
         }
         
         .testimonial-text {
             font-style: italic;
-            color: var(--text);
             margin-bottom: 20px;
-            line-height: 1.6;
         }
         
         .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .author-avatar {
-            width: 45px;
-            height: 45px;
-            background: var(--frost);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--polar-night);
-            font-weight: 600;
+            font-weight: bold;
+            color: #1a3a5f;
         }
         
         /* Contacto */
-        .contact-grid {
+        .contact-container {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        
-        @media (min-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
         }
         
         .contact-info {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
         .contact-item {
             display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 12px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-item:hover {
-            background: rgba(136, 192, 208, 0.05);
+            align-items: flex-start;
+            gap: 15px;
         }
         
         .contact-icon {
-            width: 45px;
-            height: 45px;
-            background: rgba(136, 192, 208, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: var(--frost);
-            font-size: 18px;
+            font-size: 1.5rem;
+            color: #4CAF50;
         }
         
         .contact-form {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
         .form-group {
@@ -723,651 +290,418 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--polar-night);
-            font-size: 14px;
+            font-weight: 500;
         }
         
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: var(--light);
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
         }
         
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--frost);
-            box-shadow: 0 0 0 3px rgba(136, 192, 208, 0.1);
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #3d8b40;
         }
         
         /* Footer */
         footer {
-            background: var(--polar-night);
-            color: var(--snow);
-            padding: 50px 0 25px;
-            margin-top: 60px;
+            background-color: #1a3a5f;
+            color: white;
+            padding: 50px 0 20px;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
         
-        @media (min-width: 768px) {
-            .footer-content {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-        
-        .footer-column h3 {
+        .footer-section h3 {
             margin-bottom: 20px;
-            color: var(--snow);
-            font-size: 1.1rem;
+            color: #4CAF50;
         }
         
-        .footer-links {
+        .footer-section ul {
             list-style: none;
         }
         
-        .footer-links li {
+        .footer-section ul li {
             margin-bottom: 10px;
         }
         
-        .footer-links a {
-            color: #D8DEE9;
+        .footer-section a {
+            color: #ddd;
             text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 14px;
+            transition: color 0.3s;
         }
         
-        .footer-links a:hover {
-            color: var(--snow);
-            transform: translateX(5px);
+        .footer-section a:hover {
+            color: #4CAF50;
         }
         
         .copyright {
             text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid #4C566A;
-            color: #D8DEE9;
-            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: rgba(236, 239, 244, 0.98);
-                backdrop-filter: blur(20px);
+        @media (max-width: 992px) {
+            .process-steps {
                 flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding: 40px 20px;
-                transition: left 0.3s ease;
-                gap: 20px;
+                gap: 40px;
             }
             
-            .nav-links.active {
-                left: 0;
+            .process-steps::before {
+                display: none;
             }
             
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
-            }
-            
-            .services-grid,
-            .articles-grid,
-            .testimonials-grid {
+            .contact-container {
                 grid-template-columns: 1fr;
-            }
-            
-            .article-body {
-                padding: 25px;
-            }
-            
-            .article-hero-image {
-                height: 200px;
-                font-size: 40px;
             }
         }
         
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
             }
             
-            .hero-stats {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: #1a3a5f;
+                width: 80%;
+                height: calc(100vh - 70px);
+                transition: right 0.3s ease;
+                padding: 20px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 100px 0;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .services-grid, .articles-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .service-card,
-            .contact-info,
-            .contact-form {
-                padding: 20px;
-            }
-            
-            .article-body {
-                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Dispositivos flotantes -->
-    <div class="floating-devices">
-        <div class="device" style="animation-delay: 0s;">📱</div>
-        <div class="device" style="animation-delay: -5s; font-size: 25px;">💻</div>
-        <div class="device" style="animation-delay: -10s; font-size: 20px;">⌚️</div>
-        <div class="device" style="animation-delay: -15s; font-size: 22px;">🎧</div>
-    </div>
-
-    <!-- Header -->
+    <!-- Header y Navegación -->
     <header>
         <div class="container nav-container">
-            <div class="logo" onclick="showSection('inicio')">
-                <span>ClubIGT</span>
-                <div class="logo-dot"></div>
-            </div>
-            
-            <div class="menu-toggle" id="menuToggle">
+            <div class="logo">ClubIGT</div>
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            
-            <ul class="nav-links" id="navLinks">
-                <li><a class="nav-link active" onclick="showSection('inicio'); toggleMenu()">Inicio</a></li>
-                <li><a class="nav-link" onclick="showSection('servicios'); toggleMenu()">Servicios</a></li>
-                <li><a class="nav-link" onclick="showSection('articulos'); toggleMenu()">Artículos</a></li>
-                <li><a class="nav-link" onclick="showSection('proceso'); toggleMenu()">Proceso</a></li>
-                <li><a class="nav-link" onclick="showSection('testimonios'); toggleMenu()">Testimonios</a></li>
-                <li><a class="nav-link" onclick="showSection('contacto'); toggleMenu()">Contacto</a></li>
-                <li><a class="btn" onclick="showSection('contacto'); toggleMenu()">
-                    <i class="fas fa-tools"></i> Cotizar Ahora
-                </a></li>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#articulos">Artículos</a></li>
+                <li><a href="#proceso">Proceso</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#cotizar" class="btn-cotizar">Cotizar Ahora</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- Secciones Principales -->
-    <section id="inicio" class="section active">
-        <div class="hero-bg"></div>
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
         <div class="container">
-            <div class="hero">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <i class="fas fa-star"></i>
-                        Servicio Premium Certificado
-                    </div>
-                    <h1>Expertos en Reparación<br>de Dispositivos Apple</h1>
-                    <p>Soluciones técnicas profesionales con repuestos originales y garantía extendida. Tu dispositivo en las mejores manos.</p>
-                    
-                    <div class="hero-actions">
-                        <button class="btn" onclick="showSection('servicios')">
-                            <i class="fas fa-play-circle"></i> Ver Servicios
-                        </button>
-                        <button class="btn btn-outline" onclick="showSection('articulos')">
-                            <i class="fas fa-newspaper"></i> Leer Artículos
-                        </button>
-                    </div>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-card">
-                            <span class="stat-number">2,500+</span>
-                            <span class="stat-label">Dispositivos Reparados</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">Satisfacción del Cliente</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">24h</span>
-                            <span class="stat-label">Servicio Express</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1>Soluciones Innovadoras para tu Negocio</h1>
+            <p>En ClubIGT ofrecemos servicios de consultoría especializada para impulsar el crecimiento de tu empresa con estrategias personalizadas.</p>
+            <a href="#contacto" class="btn-cotizar">Conoce Más</a>
         </div>
     </section>
 
-    <!-- Servicios -->
-    <section id="servicios" class="section services-section">
+    <!-- Sección Servicios -->
+    <section id="servicios">
         <div class="container">
-            <div class="services-header">
-                <span class="section-tag">Nuestros Servicios</span>
-                <h2 class="section-title">Reparaciones Especializadas</h2>
-                <p class="section-subtitle">Soluciones técnicas profesionales para todos tus dispositivos Apple con garantía real</p>
-            </div>
-            
+            <h2 class="section-title">Nuestros Servicios</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>iPhone & iPad</h3>
-                    <p>Reparación completa de todos los modelos con componentes de alta calidad.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Cambio de pantalla</li>
-                        <li><i class="fas fa-check"></i> Reemplazo de batería</li>
-                        <li><i class="fas fa-check"></i> Reparación de cámaras</li>
-                        <li><i class="fas fa-check"></i> Problemas de software</li>
-                    </ul>
-                    <div class="service-price">Desde $45</div>
-                    <button class="btn" onclick="showSection('contacto')">Solicitar Servicio</button>
+                    <div class="service-icon">📊</div>
+                    <h3>Consultoría Estratégica</h3>
+                    <p>Desarrollamos estrategias personalizadas para optimizar tus procesos y maximizar tus resultados.</p>
                 </div>
-                
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <h3>Mac & MacBook</h3>
-                    <p>Mantenimiento y reparación profesional para tu equipo Apple.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Pantallas y teclados</li>
-                        <li><i class="fas fa-check"></i> Actualización de componentes</li>
-                        <li><i class="fas fa-check"></i> Limpieza interna</li>
-                        <li><i class="fas fa-check"></i> Reparación de lógica</li>
-                    </ul>
-                    <div class="service-price">Desde $75</div>
-                    <button class="btn" onclick="showSection('contacto')">Solicitar Servicio</button>
+                    <div class="service-icon">🚀</div>
+                    <h3>Transformación Digital</h3>
+                    <p>Implementamos soluciones tecnológicas que modernizan tu empresa y mejoran la experiencia del cliente.</p>
                 </div>
-                
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Apple Watch & AirPods</h3>
-                    <p>Servicio especializado para wearables y accesorios Apple.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Cambio de cristal</li>
-                        <li><i class="fas fa-check"></i> Reemplazo de batería</li>
-                        <li><i class="fas fa-check"></i> Reparación de cintas</li>
-                        <li><i class="fas fa-check"></i> Mantenimiento general</li>
-                    </ul>
-                    <div class="service-price">Desde $35</div>
-                    <button class="btn" onclick="showSection('contacto')">Solicitar Servicio</button>
+                    <div class="service-icon">💼</div>
+                    <h3>Gestión de Proyectos</h3>
+                    <p>Lideramos tus iniciativas clave con metodologías ágiles para garantizar el éxito en cada etapa.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Artículos -->
-    <section id="articulos" class="section">
+    <!-- Sección Artículos -->
+    <section id="articulos">
         <div class="container">
-            <div class="services-header">
-                <span class="section-tag">Blog & Noticias</span>
-                <h2 class="section-title">Artículos Técnicos</h2>
-                <p class="section-subtitle">Mantente informado sobre las últimas tendencias, consejos y novedades del mundo Apple</p>
-            </div>
-            
+            <h2 class="section-title">Artículos Destacados</h2>
             <div class="articles-grid">
-                <!-- Artículo 1 -->
-                <div class="article-card" onclick="showArticle('articulo-iphone16')">
-                    <div class="article-image">
-                        <i class="fas fa-mobile"></i>
-                    </div>
+                <div class="article-card">
+                    <div class="article-img" style="background-image: url('https://source.unsplash.com/random/600x400/?business,strategy')"></div>
                     <div class="article-content">
-                        <div class="article-meta">
-                            <span class="article-tag">iPhone</span>
-                            <span>15 Mar 2024</span>
-                        </div>
-                        <h3>iPhone 16: Todo lo que sabemos hasta ahora</h3>
-                        <p>Analizamos los rumores y filtraciones sobre el próximo iPhone. Nuevo diseño, mejoras en cámara y posibles sorpresas de Apple.</p>
-                        <div class="read-more">Leer más <i class="fas fa-arrow-right"></i></div>
+                        <h3>5 Estrategias para Impulsar tu Negocio en 2023</h3>
+                        <p>Descubre las tendencias más importantes que están marcando la diferencia en el mundo empresarial.</p>
+                        <a href="#">Leer más</a>
                     </div>
                 </div>
-                
-                <!-- Artículo 2 -->
-                <div class="article-card" onclick="showArticle('articulo-macbook')">
-                    <div class="article-image">
-                        <i class="fas fa-laptop"></i>
-                    </div>
+                <div class="article-card">
+                    <div class="article-img" style="background-image: url('https://source.unsplash.com/random/600x400/?technology,digital')"></div>
                     <div class="article-content">
-                        <div class="article-meta">
-                            <span class="article-tag">Mac</span>
-                            <span>12 Mar 2024</span>
-                        </div>
-                        <h3>Mantenimiento Preventivo para tu MacBook</h3>
-                        <p>Consejos esenciales para mantener tu MacBook en perfecto estado y prolongar su vida útil. Limpieza, optimización y mejores prácticas.</p>
-                        <div class="read-more">Leer más <i class="fas fa-arrow-right"></i></div>
+                        <h3>Transformación Digital: ¿Por Dónde Empezar?</h3>
+                        <p>Guía práctica para empresas que buscan modernizar sus procesos y adoptar nuevas tecnologías.</p>
+                        <a href="#">Leer más</a>
                     </div>
                 </div>
-                
-                <!-- Artículo 3 -->
-                <div class="article-card" onclick="showArticle('articulo-bateria')">
-                    <div class="article-image">
-                        <i class="fas fa-battery-full"></i>
-                    </div>
+                <div class="article-card">
+                    <div class="article-img" style="background-image: url('https://source.unsplash.com/random/600x400/?leadership,team')"></div>
                     <div class="article-content">
-                        <div class="article-meta">
-                            <span class="article-tag">Consejos</span>
-                            <span>8 Mar 2024</span>
-                        </div>
-                        <h3>Cómo optimizar la batería de tu iPhone</h3>
-                        <p>Guía completa para maximizar la duración de la batería. Configuraciones, hábitos de carga y diagnóstico de problemas comunes.</p>
-                        <div class="read-more">Leer más <i class="fas fa-arrow-right"></i></div>
+                        <h3>Liderazgo en Tiempos de Cambio</h3>
+                        <p>Las habilidades clave que necesitan los líderes para guiar a sus equipos en entornos desafiantes.</p>
+                        <a href="#">Leer más</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Artículos Individuales -->
-    <!-- Artículo iPhone 16 -->
-    <section id="articulo-iphone16" class="section article-page">
+    <!-- Sección Proceso -->
+    <section id="proceso">
         <div class="container">
-            <button class="back-btn" onclick="showSection('articulos')">
-                <i class="fas fa-arrow-left"></i> Volver a Artículos
-            </button>
-            
-            <div class="article-header">
-                <span class="article-tag">iPhone</span>
-                <h1 class="section-title">iPhone 16: Todo lo que sabemos hasta ahora</h1>
-                <p class="article-meta">15 Mar 2024 • 5 min de lectura</p>
-            </div>
-            
-            <div class="article-hero-image">
-                <i class="fas fa-mobile"></i>
-            </div>
-            
-            <div class="article-body">
-                <h2>Diseño Revolucionario</h2>
-                <p>Según las últimas filtraciones, el iPhone 16 podría presentar un rediseño significativo respecto a sus predecesores. Se espera que Apple adopte un marco más delgado y materiales premium que mejoren tanto la estética como la ergonomía del dispositivo.</p>
-                
-                <h2>Mejoras en el Sistema de Cámaras</h2>
-                <p>El sistema de cámaras será una de las grandes apuestas del iPhone 16. Se rumorea que contará con:</p>
-                <ul>
-                    <li>Sensor principal de 48 MP con estabilización mejorada</li>
-                    <li>Teleobjetivo periscópico con zoom óptico 5x</li>
-                    <li>Grabación de video 8K a 60 fps</li>
-                    <li>Nuevos modos computacionales para fotografía nocturna</li>
-                </ul>
-                
-                <h2>Potencia y Rendimiento</h2>
-                <p>El chip A18 Bionic promete ser el más avanzado hasta la fecha, con mejoras significativas en:</p>
-                <ul>
-                    <li>Procesamiento de IA y machine learning</li>
-                    <li>Eficiencia energética para mayor duración de batería</li>
-                    <li>Rendimiento gráfico para gaming y realidad aumentada</li>
-                </ul>
-                
-                <h2>Consejos de Preparación</h2>
-                <p>Si estás considerando actualizar al iPhone 16, te recomendamos:</p>
-                <ul>
-                    <li>Hacer backup completo de tu dispositivo actual</li>
-                    <li>Revisar programas de trade-in para obtener mejor precio</li>
-                    <li>Considerar el momento ideal para la compra</li>
-                    <li>Preparar todos tus accesorios compatibles</li>
-                </ul>
+            <h2 class="section-title">Nuestro Proceso</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Diagnóstico</h3>
+                    <p>Analizamos tu situación actual y identificamos oportunidades de mejora.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Planificación</h3>
+                    <p>Diseñamos una estrategia personalizada con objetivos claros y medibles.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Implementación</h3>
+                    <p>Ejecutamos el plan con metodologías ágiles y seguimiento constante.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Evaluación</h3>
+                    <p>Medimos resultados y ajustamos estrategias para maximizar el impacto.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Artículo MacBook -->
-    <section id="articulo-macbook" class="section article-page">
+    <!-- Sección Testimonios -->
+    <section id="testimonios" class="testimonials">
         <div class="container">
-            <button class="back-btn" onclick="showSection('articulos')">
-                <i class="fas fa-arrow-left"></i> Volver a Artículos
-            </button>
-            
-            <div class="article-header">
-                <span class="article-tag">Mac</span>
-                <h1 class="section-title">Mantenimiento Preventivo para tu MacBook</h1>
-                <p class="article-meta">12 Mar 2024 • 4 min de lectura</p>
-            </div>
-            
-            <div class="article-hero-image">
-                <i class="fas fa-laptop"></i>
-            </div>
-            
-            <div class="article-body">
-                <h2>Limpieza Regular Es Esencial</h2>
-                <p>Mantener tu MacBook limpio no es solo cuestión de estética, sino de funcionalidad y durabilidad. La acumulación de polvo y partículas puede afectar el rendimiento y la vida útil de los componentes.</p>
-                
-                <h2>Pasos para una Limpieza Adecuada</h2>
-                <p><strong>Pantalla y Exterior:</strong></p>
-                <ul>
-                    <li>Usa un paño de microfibra ligeramente humedecido</li>
-                    <li>Nunca uses productos de limpieza convencionales</li>
-                    <li>Limpia en movimientos circulares suaves</li>
-                </ul>
-                
-                <p><strong>Teclado y Trackpad:</strong></p>
-                <ul>
-                    <li>Usa aire comprimido para eliminar partículas</li>
-                    <li>Limpia entre teclas con hisopos de algodón</li>
-                    <li>Verifica que todas las teclas respondan correctamente</li>
-                </ul>
-                
-                <h2>Optimización del Sistema</h2>
-                <p>Mantener tu macOS optimizado es crucial para el rendimiento:</p>
-                <ul>
-                    <li>Actualiza regularmente el sistema operativo</li>
-                    <li>Limpia archivos temporales y caché</li>
-                    <li>Gestiona aplicaciones que inicien con el sistema</li>
-                    <li>Monitorea el uso de almacenamiento</li>
-                </ul>
-                
-                <h2>Señales de Alerta</h2>
-                <p>Si notas alguno de estos síntomas, podría ser momento de una revisión profesional:</p>
-                <ul>
-                    <li>Sobrecalentamiento frecuente</li>
-                    <li>Rendimiento lento inusual</li>
-                    <li>Ruidos extraños del ventilador</li>
-                    <li>Problemas de carga de batería</li>
-                </ul>
+            <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p class="testimonial-text">"ClubIGT transformó completamente nuestra forma de trabajar. En solo 6 meses logramos aumentar nuestra productividad en un 40%."</p>
+                    <p class="testimonial-author">- María González, Directora de Operaciones</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Artículo Batería -->
-    <section id="articulo-bateria" class="section article-page">
+    <!-- Sección Contacto -->
+    <section id="contacto">
         <div class="container">
-            <button class="back-btn" onclick="showSection('articulos')">
-                <i class="fas fa-arrow-left"></i> Volver a Artículos
-            </button>
-            
-            <div class="article-header">
-                <span class="article-tag">Consejos</span>
-                <h1 class="section-title">Cómo optimizar la batería de tu iPhone</h1>
-                <p class="article-meta">8 Mar 2024 • 6 min de lectura</p>
-            </div>
-            
-            <div class="article-hero-image">
-                <i class="fas fa-battery-full"></i>
-            </div>
-            
-            <div class="article-body">
-                <h2>Entendiendo la Salud de la Batería</h2>
-                <p>La batería de tu iPhone es un componente que se degrada naturalmente con el tiempo. Comprender cómo funciona y cómo cuidarla puede extender significativamente su vida útil.</p>
-                
-                <h2>Configuraciones Clave para Ahorrar Energía</h2>
-                <p><strong>Brillo y Tiempo de Bloqueo:</strong></p>
-                <ul>
-                    <li>Ajusta el brillo automático o manténlo al 50-60%</li>
-                    <li>Configura el bloqueo automático a 30 segundos o 1 minuto</li>
-                    <li>Desactiva el elevador para despertar cuando no sea necesario</li>
-                </ul>
-                
-                <p><strong>Notificaciones y Actualizaciones en Segundo Plano:</strong></p>
-                <ul>
-                    <li>Gestiona qué apps pueden enviarte notificaciones</li>
-                    <li>Desactiva la actualización en segundo plano para apps no esenciales</li>
-                    <li>Revisa permisos de ubicación y limítalos cuando sea posible</li>
-                </ul>
-                
-                <h2>Hábitos de Carga Inteligentes</h2>
-                <p>Los mitos sobre la carga de baterías abundan, pero la ciencia es clara:</p>
-                <ul>
-                    <li>Mantén la batería entre 20% y 80% cuando sea posible</li>
-                    <li>Evita cargas completas al 100% de manera constante</li>
-                    <li>No dejes que la batería llegue a 0% frecuentemente</li>
-                    <li>Usa cargadores certificados Apple o MFi</li>
-                </ul>
-                
-                <h2>Diagnóstico de Problemas</h2>
-                <p>Si notas que tu batería se agota rápidamente:</p>
-                <ul>
-                    <li>Revisa el consumo por app en Ajustes > Batería</li>
-                    <li>Verifica la salud de la batería en Ajustes > Batería > Salud</li>
-                    <li>Considera un restablecimiento de configuración si el problema persiste</li>
-                    <li>Consulta con técnicos certificados si necesitas reemplazo</li>
-                </ul>
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Dirección</h3>
+                            <p>Av. Principal 123, Ciudad, País</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Teléfono</h3>
+                            <p>+1 234 567 8900</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>info@clubigt.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h3>Horario de Atención</h3>
+                            <p>Lunes a Viernes: 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Resto de las secciones (Proceso, Testimonios, Contacto) se mantienen igual -->
-    <!-- [Código de las otras secciones igual que antes] -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ClubIGT</h3>
+                    <p>Soluciones innovadoras para impulsar el crecimiento de tu negocio con estrategias personalizadas.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#articulos">Artículos</a></li>
+                        <li><a href="#proceso">Proceso</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#">Consultoría Estratégica</a></li>
+                        <li><a href="#">Transformación Digital</a></li>
+                        <li><a href="#">Gestión de Proyectos</a></li>
+                        <li><a href="#">Capacitación</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>📞 +1 234 567 8900</li>
+                        <li>✉️ info@clubigt.com</li>
+                        <li>📍 Av. Principal 123, Ciudad</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ClubIGT. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Mostrar sección
-        function showSection(sectionId) {
-            console.log('Cambiando a sección:', sectionId);
-            
-            // Ocultar sección actual
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
+        // Menú hamburguesa para móviles
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
             });
-            
-            // Remover clase active de todos los nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Mostrar nueva sección
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-            
-            // Activar nav link correspondiente
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.textContent.trim().toLowerCase() === sectionId.toLowerCase() || 
-                    (sectionId === 'inicio' && link.textContent.trim() === 'Inicio')) {
-                    link.classList.add('active');
+        });
+        
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
             });
-            
-            // Scroll al inicio
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Cerrar menú móvil si está abierto
-            toggleMenu(true);
-        }
-
-        // Mostrar artículo individual
-        function showArticle(articleId) {
-            showSection(articleId);
-        }
-
-        // Menú móvil
-        function toggleMenu(closeOnly = false) {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.getElementById('menuToggle');
-            
-            if (closeOnly) {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-            } else {
-                navLinks.classList.toggle('active');
-                menuToggle.classList.toggle('active');
-            }
-        }
-
-        // Enviar formulario
-        function submitForm() {
-            const name = document.getElementById('name').value;
-            const device = document.getElementById('device').value;
-            
-            if (!name || !device) {
-                alert('Por favor completa los campos requeridos');
-                return;
-            }
-            
-            alert(`¡Gracias ${name}! Hemos recibido tu solicitud para reparación de ${device}. Te contactaremos pronto.`);
-            
-            // Limpiar formulario
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('device').value = '';
-            document.getElementById('problem').value = '';
-        }
-
-        // Efectos de hover mejorados
-        document.addEventListener('DOMContentLoaded', function() {
-            // Efecto en tarjetas
-            const cards = document.querySelectorAll('.service-card, .process-step, .testimonial-card, .article-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Efecto en botones
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-2px)';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-        });
-
-        // Efecto de scroll en header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(236, 239, 244, 0.98)';
-                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.background = 'rgba(236, 239, 244, 0.95)';
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            }
-        });
-
-        // Cerrar menú al hacer clic fuera
-        document.addEventListener('click', function(event) {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.getElementById('menuToggle');
-            
-            if (!event.target.closest('.nav-container') && navLinks.classList.contains('active')) {
-                toggleMenu(true);
-            }
         });
     </script>
 </body>
