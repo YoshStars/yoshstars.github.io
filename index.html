@@ -1,1030 +1,257 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClubIGT - Servicios Técnicos Apple Premium</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        
-        :root {
-            --primary: #1D1D1F;
-            --primary-dark: #000000;
-            --secondary: #86868B;
-            --accent: #007AFF;
-            --accent-hover: #0056CC;
-            --light: #F5F5F7;
-            --dark: #1D1D1F;
-            --text: #1D1D1F;
-            --border: #D2D2D7;
-            --card-bg: #FFFFFF;
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header Premium */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-icon {
-            color: var(--accent);
-            font-size: 24px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        .nav-link {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            font-size: 15px;
-        }
-        
-        .nav-link.active {
-            color: var(--accent);
-            background: rgba(0, 122, 255, 0.1);
-        }
-        
-        .nav-link:hover {
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .nav-link.active::after {
-            width: 30px;
-        }
-        
-        .btn {
-            background: var(--accent);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 15px;
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
-        }
-        
-        .btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
-        }
-        
-        /* iPhone Floating Animation */
-        .floating-iphone {
-            position: fixed;
-            font-size: 40px;
-            z-index: 999;
-            pointer-events: none;
-            animation: floatAround 20s infinite linear;
-            opacity: 0.1;
-            filter: blur(0.5px);
-        }
-        
-        @keyframes floatAround {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.1;
-            }
-            25% {
-                transform: translate(calc(100vw - 100px), calc(50vh - 50px)) rotate(90deg);
-                opacity: 0.15;
-            }
-            50% {
-                transform: translate(calc(50vw - 50px), calc(100vh - 100px)) rotate(180deg);
-                opacity: 0.1;
-            }
-            75% {
-                transform: translate(calc(25vw - 25px), calc(25vh - 25px)) rotate(270deg);
-                opacity: 0.15;
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-                opacity: 0.1;
-            }
-        }
-        
-        /* Secciones */
-        .section {
-            min-height: 100vh;
-            padding: 120px 0 80px;
-            display: none;
-            position: relative;
-        }
-        
-        .section.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Hero Section Premium - CENTRADO */
-        .hero {
-            background: linear-gradient(135deg, var(--light) 0%, #FFFFFF 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: var(--gradient);
-            border-radius: 50%;
-            opacity: 0.03;
-            animation: pulse 8s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.03; }
-            50% { transform: scale(1.1); opacity: 0.05; }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero-content h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
-        }
-        
-        .hero-content p {
-            font-size: 1.3rem;
-            color: var(--secondary);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 60px;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-        
-        .stat-label {
-            color: var(--secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        /* Servicios Premium */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-        
-        .service-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-        }
-        
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .service-icon {
-            font-size: 48px;
-            margin-bottom: 25px;
-            color: var(--accent);
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-weight: 700;
-        }
-        
-        .service-features {
-            list-style: none;
-            margin: 25px 0;
-        }
-        
-        .service-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .service-features li:last-child {
-            border-bottom: none;
-        }
-        
-        .service-features li i {
-            color: var(--accent);
-            font-size: 12px;
-        }
-        
-        .service-price {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin: 25px 0;
-        }
-        
-        /* Reparaciones Específicas */
-        .repair-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
-        
-        .category-card {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-        }
-        
-        .category-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-        
-        .category-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-            font-weight: 600;
-        }
-        
-        /* Garantías */
-        .warranty-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .warranty-card {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        .warranty-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-        }
-        
-        .warranty-icon {
-            font-size: 45px;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-        
-        /* Contacto */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-top: 50px;
-        }
-        
-        .contact-info {
-            background: var(--card-bg);
-            padding: 45px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 15px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-item:hover {
-            background: rgba(0, 122, 255, 0.05);
-        }
-        
-        .contact-icon {
-            font-size: 24px;
-            margin-right: 20px;
-            color: var(--accent);
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 122, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .contact-form {
-            background: var(--card-bg);
-            padding: 45px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 14px;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: var(--light);
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-        }
-        
-        /* Títulos de sección */
-        .section-title {
-            font-size: 3.2rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--dark);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            font-size: 1.2rem;
-            text-align: center;
-            color: var(--secondary);
-            margin-bottom: 60px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-        
-        /* Footer Premium */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-            margin-top: 80px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 25px;
-            color: white;
-            font-size: 1.3rem;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #8E8E93;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #2C2C2E;
-            color: #8E8E93;
-            font-size: 14px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 968px) {
-            .nav-links {
-                gap: 20px;
-            }
-            
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .floating-iphone {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .section {
-                padding: 100px 0 60px;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 30px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClubIGT - Servicios Técnicos Apple Premium</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif
+}
+
+/* ================= VARIABLES ================= */
+:root{
+    --primary:#1D1D1F;
+    --secondary:#86868B;
+    --accent:#007AFF;
+    --accent-hover:#0056CC;
+    --light:#F5F5F7;
+    --border:#D2D2D7;
+    --card-bg:#FFFFFF;
+    --gradient:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+}
+
+/* ================= BODY ================= */
+body{
+    background:var(--light);
+    color:var(--primary);
+    overflow-x:hidden
+}
+
+/* ================= LOCK SCREEN ================= */
+#lockScreen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#000,#1d1d1f);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:99999
+}
+.lock-box{
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    width:90%;
+    max-width:360px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.5)
+}
+.lock-box h2{margin-bottom:10px}
+.lock-box input{
+    width:100%;
+    padding:14px;
+    margin:20px 0;
+    border-radius:12px;
+    border:1px solid var(--border);
+    font-size:16px;
+    text-align:center
+}
+.lock-box button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:25px;
+    background:var(--accent);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer
+}
+#errorMsg{
+    color:red;
+    margin-top:15px;
+    display:none
+}
+
+/* ================= HEADER ================= */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    z-index:1000
+}
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px
+}
+.nav-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0
+}
+.logo{
+    font-size:28px;
+    font-weight:800;
+    cursor:pointer
+}
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:40px
+}
+.nav-links a{
+    text-decoration:none;
+    color:var(--primary);
+    font-weight:500;
+    cursor:pointer
+}
+
+/* Hamburguesa */
+.menu-btn{
+    display:none;
+    font-size:26px;
+    cursor:pointer
+}
+
+/* ================= SECTIONS ================= */
+.section{
+    min-height:100vh;
+    padding:120px 0 80px;
+    display:none
+}
+.section.active{
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+/* ================= HERO ================= */
+.hero{
+    text-align:center;
+    max-width:800px
+}
+.hero h1{
+    font-size:4rem;
+    font-weight:800;
+    margin-bottom:24px
+}
+.hero p{
+    font-size:1.3rem;
+    color:var(--secondary)
+}
+.btn{
+    background:var(--accent);
+    color:#fff;
+    padding:14px 32px;
+    border-radius:25px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:40px
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+    .menu-btn{display:block}
+    .nav-links{
+        position:absolute;
+        top:80px;
+        left:0;
+        width:100%;
+        background:#fff;
+        flex-direction:column;
+        align-items:center;
+        padding:30px 0;
+        display:none
+    }
+    .nav-links.active{display:flex}
+    .hero h1{font-size:2.6rem}
+}
+</style>
 </head>
+
 <body>
-    <!-- iPhone flotante -->
-    <div class="floating-iphone">📱</div>
-    <div class="floating-iphone" style="animation-delay: -5s; font-size: 30px; opacity: 0.08;">📱</div>
-    <div class="floating-iphone" style="animation-delay: -10s; font-size: 25px; opacity: 0.06;">📱</div>
 
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo" onclick="showSection('inicio')">
-                <i class="logo-icon fas fa-cogs"></i>
-                ClubIGT
-            </div>
-            <ul class="nav-links">
-                <li><a class="nav-link active" onclick="showSection('inicio')">Inicio</a></li>
-                <li><a class="nav-link" onclick="showSection('servicios')">Servicios</a></li>
-                <li><a class="nav-link" onclick="showSection('reparaciones')">Reparaciones</a></li>
-                <li><a class="nav-link" onclick="showSection('garantia')">Garantía</a></li>
-                <li><a class="nav-link" onclick="showSection('contacto')">Contacto</a></li>
-                <li><a class="btn" onclick="showSection('contacto')">
-                    <i class="fas fa-tools"></i> Cotizar Reparación
-                </a></li>
-            </ul>
-        </div>
-    </header>
+<!-- 🔐 LOCK -->
+<div id="lockScreen">
+    <div class="lock-box">
+        <h2>Acceso Privado</h2>
+        <p>Ingresa el código</p>
+        <input type="password" id="accessCode" placeholder="Código de acceso">
+        <button onclick="checkCode()">Entrar</button>
+        <p id="errorMsg">Código incorrecto</p>
+    </div>
+</div>
 
-    <!-- Secciones -->
-    <section id="inicio" class="section active">
-        <div class="container">
-            <div class="hero">
-                <div class="hero-content">
-                    <h1>Servicios Técnicos<br>Apple Premium</h1>
-                    <p>Expertos certificados en reparación de dispositivos Apple. Tecnología de punta y garantía real en todos nuestros servicios.</p>
-                    <button class="btn" onclick="showSection('servicios')">
-                        <i class="fas fa-play-circle"></i> Ver Servicios
-                    </button>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">2,500+</span>
-                            <span class="stat-label">Reparaciones Exitosas</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">Satisfacción del Cliente</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">24h</span>
-                            <span class="stat-label">Servicio Express</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HEADER -->
+<header>
+    <div class="container nav-container">
+        <div class="logo" onclick="showSection('inicio')">ClubIGT</div>
+        <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+        <ul class="nav-links" id="menu">
+            <li><a onclick="showSection('inicio')">Inicio</a></li>
+            <li><a onclick="showSection('servicios')">Servicios</a></li>
+            <li><a onclick="showSection('contacto')">Contacto</a></li>
+        </ul>
+    </div>
+</header>
 
-    <section id="servicios" class="section">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <p class="section-subtitle">Soluciones técnicas profesionales para todos tus dispositivos Apple</p>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <h3>Reparación de iPhone</h3>
-                    <p>Servicio especializado en todos los modelos de iPhone con repuestos de alta calidad.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Cambio de pantalla y cristal</li>
-                        <li><i class="fas fa-check"></i> Reemplazo de batería</li>
-                        <li><i class="fas fa-check"></i> Reparación de cámaras</li>
-                        <li><i class="fas fa-check"></i> Solución de problemas de software</li>
-                        <li><i class="fas fa-check"></i> Reparación de conectores</li>
-                    </ul>
-                    <div class="service-price">Desde $50</div>
-                    <button class="btn" onclick="showSection('contacto')">Solicitar Servicio</button>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <h3>Reparación de Mac</h3>
-                    <p>Mantenimiento y reparación de MacBook, iMac y Mac mini con técnicos certificados.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Cambio de pantalla LCD</li>
-                        <li><i class="fas fa-check"></i> Reemplazo de teclado</li>
-                        <li><i class="fas fa-check"></i> Limpieza interna y mantenimiento</li>
-                        <li><i class="fas fa-check"></i> Actualización de componentes</li>
-                        <li><i class="fas fa-check"></i> Reparación de lógica principal</li>
-                    </ul>
-                    <div class="service-price">Desde $80</div>
-                    <button class="btn" onclick="showSection('contacto')">Solicitar Servicio</button>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">⌚️</div>
-                    <h3>Reparación de Apple Watch</h3>
-                    <p>Servicio técnico especializado para Apple Watch Series y Ultra.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Cambio de cristal</li>
-                        <li><i class="fas fa-check"></i> Reemplazo de batería</li>
-                        <li><i class="fas fa-check"></i> Reparación de digital crown</li>
-                        <li><i class="fas fa-check"></i> Cambio de cintas</li>
-                        <li><i class="fas fa-check"></i> Diagnóstico completo</li>
-                    </ul>
-                    <div class="service-price">Desde $40</div>
-                    <button class="btn" onclick="showSection('contacto')">Solicitar Servicio</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- SECTIONS -->
+<section id="inicio" class="section active">
+    <div class="hero">
+        <h1>Servicios Técnicos Apple Premium</h1>
+        <p>Reparación profesional con garantía real</p>
+        <button class="btn" onclick="showSection('servicios')">Ver servicios</button>
+    </div>
+</section>
 
-    <section id="reparaciones" class="section">
-        <div class="container">
-            <h2 class="section-title">Reparaciones Específicas</h2>
-            <p class="section-subtitle">Selecciona el tipo de reparación que necesitas</p>
-            
-            <div class="repair-categories">
-                <div class="category-card" onclick="showSection('contacto')">
-                    <div class="category-icon">🔄</div>
-                    <h3>Cambio de Pantalla</h3>
-                    <p>Reemplazo profesional de pantallas rotas o dañadas</p>
-                </div>
-                
-                <div class="category-card" onclick="showSection('contacto')">
-                    <div class="category-icon">🔋</div>
-                    <h3>Reemplazo de Batería</h3>
-                    <p>Baterías originales para optimizar el rendimiento</p>
-                </div>
-                
-                <div class="category-card" onclick="showSection('contacto')">
-                    <div class="category-icon">💧</div>
-                    <h3>Daño por Líquido</h3>
-                    <p>Limpieza y reparación de dispositivos mojados</p>
-                </div>
-                
-                <div class="category-card" onclick="showSection('contacto')">
-                    <div class="category-icon">📸</div>
-                    <h3>Reparación de Cámara</h3>
-                    <p>Soluciones para cámaras borrosas o dañadas</p>
-                </div>
-                
-                <div class="category-card" onclick="showSection('contacto')">
-                    <div class="category-icon">⚡</div>
-                    <h3>Problemas de Carga</h3>
-                    <p>Reparación de puertos y circuitos de carga</p>
-                </div>
-                
-                <div class="category-card" onclick="showSection('contacto')">
-                    <div class="category-icon">🔧</div>
-                    <h3>Mantenimiento Preventivo</h3>
-                    <p>Limpieza y revisión para prevenir futuros problemas</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="servicios" class="section">
+    <h2>Nuestros Servicios</h2>
+</section>
 
-    <section id="garantia" class="section">
-        <div class="container">
-            <h2 class="section-title">Nuestra Garantía</h2>
-            <p class="section-subtitle">Trabajamos con los más altos estándares de calidad</p>
-            
-            <div class="warranty-features">
-                <div class="warranty-card">
-                    <div class="warranty-icon">✅</div>
-                    <h3>90 Días de Garantía</h3>
-                    <p>Todas nuestras reparaciones incluyen 90 días de garantía en partes y mano de obra</p>
-                </div>
-                
-                <div class="warranty-card">
-                    <div class="warranty-icon">🔧</div>
-                    <h3>Repuestos Originales</h3>
-                    <p>Utilizamos repuestos de la más alta calidad y compatibilidad</p>
-                </div>
-                
-                <div class="warranty-card">
-                    <div class="warranty-icon">👨‍💼</div>
-                    <h3>Técnicos Certificados</h3>
-                    <p>Nuestro equipo cuenta con certificaciones y amplia experiencia</p>
-                </div>
-                
-                <div class="warranty-card">
-                    <div class="warranty-icon">⚡</div>
-                    <h3>Servicio Rápido</h3>
-                    <p>La mayoría de las reparaciones se completan en el mismo día</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="contacto" class="section">
+    <h2>Contacto</h2>
+</section>
 
-    <section id="contacto" class="section">
-        <div class="container">
-            <h2 class="section-title">Solicita tu Reparación</h2>
-            <p class="section-subtitle">Contáctanos para una cotización gratuita</p>
-            
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3 style="margin-bottom: 30px;">Información de Contacto</h3>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div>
-                            <h4>Teléfono</h4>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>servicios@clubigt.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">🕒</div>
-                        <div>
-                            <h4>Horario</h4>
-                            <p>Lun - Vie: 9:00 AM - 7:00 PM<br>Sab: 9:00 AM - 2:00 PM</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h4>Ubicación</h4>
-                            <p>Av. Tecnología #123<br>Ciudad Tecnológica</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3 style="margin-bottom: 30px;">Formulario de Contacto</h3>
-                    
-                    <div class="form-group">
-                        <label for="name">Nombre completo</label>
-                        <input type="text" id="name" placeholder="Tu nombre">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="tu@email.com">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Teléfono</label>
-                        <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="device">Dispositivo</label>
-                        <select id="device">
-                            <option value="">Selecciona tu dispositivo</option>
-                            <option value="iphone">iPhone</option>
-                            <option value="mac">Mac</option>
-                            <option value="ipad">iPad</option>
-                            <option value="watch">Apple Watch</option>
-                            <option value="airpods">AirPods</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="problem">Descripción del problema</label>
-                        <textarea id="problem" placeholder="Describe el problema que presenta tu dispositivo..." rows="4"></textarea>
-                    </div>
-                    
-                    <button class="btn" onclick="submitForm()">Enviar Solicitud</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<script>
+/* LOCK */
+document.body.style.overflow="hidden"
+function checkCode(){
+    const code=document.getElementById("accessCode").value
+    if(code==="1212"){
+        document.getElementById("lockScreen").style.display="none"
+        document.body.style.overflow="auto"
+    }else{
+        document.getElementById("errorMsg").style.display="block"
+    }
+}
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ClubIGT</h3>
-                    <ul class="footer-links">
-                        <li><a onclick="showSection('inicio')">Inicio</a></li>
-                        <li><a onclick="showSection('servicios')">Servicios</a></li>
-                        <li><a onclick="showSection('reparaciones')">Reparaciones</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Servicios</h3>
-                    <ul class="footer-links">
-                        <li><a onclick="showSection('servicios')">Reparación iPhone</a></li>
-                        <li><a onclick="showSection('servicios')">Reparación Mac</a></li>
-                        <li><a onclick="showSection('servicios')">Reparación iPad</a></li>
-                        <li><a onclick="showSection('servicios')">Reparación Apple Watch</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li><a>+1 (555) 123-4567</a></li>
-                        <li><a>servicios@clubigt.com</a></li>
-                        <li><a>Av. Tecnología #123</a></li>
-                        <li><a onclick="showSection('contacto')">Cotizar reparación</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2024 ClubIGT - Servicios Técnicos Apple. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+/* MENU */
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active")
+}
 
-    <script>
-        // Mostrar sección - FUNCION CORREGIDA
-        function showSection(sectionId) {
-            console.log('Cambiando a sección:', sectionId);
-            
-            // Ocultar sección actual
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Remover clase active de todos los nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Mostrar nueva sección
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-            
-            // Activar nav link correspondiente
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.textContent.trim().toLowerCase() === sectionId.toLowerCase() || 
-                    (sectionId === 'inicio' && link.textContent.trim() === 'Inicio')) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Scroll al inicio
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+/* SECTIONS */
+function showSection(id){
+    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"))
+    document.getElementById(id).classList.add("active")
+    document.getElementById("menu").classList.remove("active")
+    window.scrollTo({top:0})
+}
+</script>
 
-        // Enviar formulario
-        function submitForm() {
-            const name = document.getElementById('name').value;
-            const device = document.getElementById('device').value;
-            
-            if (!name || !device) {
-                alert('Por favor completa los campos requeridos');
-                return;
-            }
-            
-            alert(`¡Gracias ${name}! Hemos recibido tu solicitud para reparación de ${device}. Te contactaremos pronto.`);
-            
-            // Limpiar formulario
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('device').value = '';
-            document.getElementById('problem').value = '';
-        }
-
-        // Efectos de hover mejorados
-        document.addEventListener('DOMContentLoaded', function() {
-            // Efecto en tarjetas
-            const cards = document.querySelectorAll('.service-card, .category-card, .warranty-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Efecto en botones
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-2px)';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-        });
-
-        // Efecto de scroll en header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            }
-        });
-    </script>
 </body>
 </html>
+
