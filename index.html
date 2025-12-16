@@ -74,6 +74,17 @@
             font-size: 24px;
         }
         
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
@@ -187,7 +198,7 @@
             justify-content: center;
         }
         
-        /* Hero Section Premium - CENTRADO */
+        /* Hero Section Premium */
         .hero {
             background: linear-gradient(135deg, var(--light) 0%, #FFFFFF 100%);
             display: flex;
@@ -581,8 +592,10 @@
             font-size: 14px;
         }
         
-        /* Responsive */
-        @media (max-width: 968px) {
+        /* ===== RESPONSIVE DESIGN ===== */
+        
+        /* Tablets (768px - 1024px) */
+        @media (max-width: 1024px) {
             .nav-links {
                 gap: 20px;
             }
@@ -591,8 +604,125 @@
                 font-size: 3rem;
             }
             
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .repair-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .warranty-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        /* Móviles grandes (576px - 768px) */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-link {
+                width: 90%;
+                text-align: center;
+                padding: 18px;
+                font-size: 18px;
+                border-radius: 12px;
+                margin: 5px 0;
+            }
+            
+            .btn.nav-btn {
+                margin-top: 20px;
+            }
+            
+            .section {
+                min-height: auto;
+                padding: 120px 0 50px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+                gap: 25px;
+            }
+            
+            .service-card {
+                padding: 30px 25px;
+            }
+            
+            .repair-categories {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+                gap: 20px;
+            }
+            
+            .category-card {
+                padding: 25px 20px;
+            }
+            
+            .warranty-features {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+                gap: 25px;
+            }
+            
+            .warranty-card {
+                padding: 30px 25px;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+                margin-top: 40px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
             }
             
             .floating-iphone {
@@ -600,26 +730,152 @@
             }
         }
         
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+        /* Móviles pequeños (menos de 576px) */
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 22px;
             }
             
-            .section {
-                padding: 100px 0 60px;
+            .logo-icon {
+                font-size: 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
             }
             
             .section-title {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
             
-            .services-grid {
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .service-card {
+                padding: 25px 20px;
+            }
+            
+            .service-icon {
+                font-size: 40px;
+            }
+            
+            .service-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .service-price {
+                font-size: 1.4rem;
+            }
+            
+            .category-card, .warranty-card {
+                padding: 20px 15px;
+            }
+            
+            .category-icon, .warranty-icon {
+                font-size: 35px;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .contact-item {
+                padding: 12px;
+            }
+            
+            .contact-icon {
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                margin-right: 15px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 14px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-content {
                 grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .footer-column h3 {
+                font-size: 1.2rem;
+            }
+            
+            .footer-links li {
+                display: inline-block;
+                margin: 0 8px 10px;
+            }
+            
+            .footer-links a {
+                font-size: 13px;
+            }
+        }
+        
+        /* Landscape móvil */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .section {
+                padding: 100px 0 40px;
+                min-height: auto;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            
+            .hero-content p {
+                margin-bottom: 25px;
             }
             
             .hero-stats {
-                flex-direction: column;
-                gap: 30px;
+                margin-top: 25px;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                height: calc(100vh - 60px);
+                padding-top: 20px;
+                overflow-y: auto;
+            }
+        }
+        
+        /* Optimización para toques */
+        @media (hover: none) and (pointer: coarse) {
+            .service-card, .category-card, .warranty-card {
+                cursor: pointer;
+            }
+            
+            .btn, .nav-link {
+                min-height: 48px;
+                min-width: 48px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px;
+            }
+        }
+        
+        /* Pantallas muy anchas */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1400px;
+            }
+            
+            .hero-content h1 {
+                font-size: 5rem;
             }
         }
     </style>
@@ -637,13 +893,18 @@
                 <i class="logo-icon fas fa-cogs"></i>
                 ClubIGT
             </div>
+            
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <ul class="nav-links">
                 <li><a class="nav-link active" onclick="showSection('inicio')">Inicio</a></li>
                 <li><a class="nav-link" onclick="showSection('servicios')">Servicios</a></li>
                 <li><a class="nav-link" onclick="showSection('reparaciones')">Reparaciones</a></li>
                 <li><a class="nav-link" onclick="showSection('garantia')">Garantía</a></li>
                 <li><a class="nav-link" onclick="showSection('contacto')">Contacto</a></li>
-                <li><a class="btn" onclick="showSection('contacto')">
+                <li><a class="btn nav-btn" onclick="showSection('contacto')">
                     <i class="fas fa-tools"></i> Cotizar Reparación
                 </a></li>
             </ul>
@@ -935,7 +1196,23 @@
     </footer>
 
     <script>
-        // Mostrar sección - FUNCION CORREGIDA
+        // Alternar menú hamburguesa
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            
+            // Cambiar ícono
+            const menuIcon = document.querySelector('.menu-toggle i');
+            if (navLinks.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+        
+        // Mostrar sección
         function showSection(sectionId) {
             console.log('Cambiando a sección:', sectionId);
             
@@ -962,6 +1239,12 @@
                     link.classList.add('active');
                 }
             });
+            
+            // Cerrar menú móvil si está abierto
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
             
             // Scroll al inicio
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1012,6 +1295,18 @@
                     this.style.transform = 'translateY(0)';
                 });
             });
+            
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', function(event) {
+                const navLinks = document.querySelector('.nav-links');
+                const menuToggle = document.querySelector('.menu-toggle');
+                
+                if (navLinks.classList.contains('active') && 
+                    !navLinks.contains(event.target) && 
+                    !menuToggle.contains(event.target)) {
+                    toggleMenu();
+                }
+            });
         });
 
         // Efecto de scroll en header
@@ -1024,6 +1319,16 @@
                 header.style.background = 'rgba(255, 255, 255, 0.95)';
                 header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
             }
+        });
+        
+        // Prevenir zoom en inputs en iOS
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.fontSize = '16px';
+                });
+            });
         });
     </script>
 </body>
